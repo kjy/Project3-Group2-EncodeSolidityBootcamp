@@ -1,10 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "./ERC20Votes.sol"; // use interface to keep it lightweight
+interface IERC20Votes {
+    function getPastVotes(address account, uint256 blockNumber)
+        external
+        view
+        returns (uint256);
+}
 
 contract Ballot {
-    MyToken public voteToken;
+    IERC20Votes public voteToken;
 
     uint256 public targetBlockNumber;
 
@@ -22,7 +27,7 @@ contract Ballot {
         address _voteToken,
         uint256 _targetBlockNumber
     ) {
-        voteToken = MyToken(_voteToken);
+        voteToken = IERC20Votes(_voteToken);
         targetBlockNumber = _targetBlockNumber;
         for (uint i = 0; i < proposalNames.length; i++) {
             proposals.push(Proposal({name: proposalNames[i], voteCount: 0}));
