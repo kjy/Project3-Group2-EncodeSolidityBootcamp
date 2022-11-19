@@ -15,7 +15,7 @@ async function deploy() {
     let wallet: Wallet;
     let ballotContract: Ballot;
     let erc20Contract: MyToken;
-    const provider = ethers.getDefaultProvider("goerli")
+    const provider = ethers.getDefaultProvider("goerli", { etherscan: process.env.ETHERSCAN_API_KEY })
 
     // get commnad line args for proposals
     const args = process.argv;
@@ -35,7 +35,6 @@ async function deploy() {
         wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "")
     }
     const signer = wallet.connect(provider)
-    console.log(signer.address)
 
     // Deploy ERC20
     const erc20Factory = new MyToken__factory(signer);
