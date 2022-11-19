@@ -1,4 +1,7 @@
+import { SetupSigner } from "./constants";
+
 async function vote() {
+    const ballotContract = await SetupSigner();
 }
 
 vote().catch((e) => {
