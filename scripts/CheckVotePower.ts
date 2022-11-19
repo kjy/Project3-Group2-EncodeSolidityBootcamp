@@ -1,7 +1,7 @@
 import { SetupSigner } from "./constants";
 
 async function checkVotePower() {
-    const ballotContract = await SetupSigner();
+    const [ballotContract, _] = await SetupSigner();
 }
 
 checkVotePower().catch((e) => {
