@@ -1,10 +1,12 @@
 import { ethers, Wallet } from "ethers";
-import { Ballot__factory, MyToken__factory } from "../typechain-types";
+import { Ballot, Ballot__factory, MyToken, MyToken__factory } from "../typechain-types";
+import * as dotenv from "dotenv";
+dotenv.config()
 
 const ballotContractAddress = "0x3dB15985d01971Fe4417d5dDd3B1F7E72fefF743";
 const tokenContractAddress = "0x772Ef1798896080b2Eb51b32E68c1E2EE696009F";
 
-export async function SetupSigner() {
+export async function SetupSigner(): Promise<[Ballot, MyToken]> {
     const provider = ethers.getDefaultProvider("goerli", { etherscan: process.env.ETHERSCAN_API_KEY })
     let wallet: Wallet;
 
