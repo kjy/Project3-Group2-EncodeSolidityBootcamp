@@ -1,8 +1,6 @@
 import { ethers } from "ethers";
 import { SetupSigner } from "./utils";
 
-const MINT_TOKENS = ethers.utils.parseEther("1000");
-
 async function giveVotingTokens() {
     const [ballotContract, tokenContract] = await SetupSigner();
 
@@ -11,7 +9,7 @@ async function giveVotingTokens() {
     const voter = args[0];
     const mintAmount = ethers.utils.parseEther(args[1]);
 
-    const mintTx = await tokenContract.mint(voter, MINT_TOKENS);
+    const mintTx = await tokenContract.mint(voter, mintAmount);
     await mintTx.wait()
     let voterTokenBalance = await tokenContract.balanceOf(voter);
     console.log(`After mint voter ${voter} has a total of ${voterTokenBalance} decimal units`);
