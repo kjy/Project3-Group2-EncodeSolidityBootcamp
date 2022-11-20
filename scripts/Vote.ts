@@ -19,11 +19,14 @@ async function vote() {
     
     const args = process.argv.slice(2);
 
-    const proposal = args[0];  // proposal index
+    const proposal = args[0];  // proposal index of 1/3 proposals
     const amount = args[1];   // amount
     console.log(`Voting for ${vote}`);
 
     const tx = await tokenizedBallotContract.vote(proposal, amount);
+
+    const ballotContractAddress: string = "";
+    console.log(`Tokenized Ballot Contract Address at ${ballotContractAddress}`);
     
     vote().catch((error) => {
         console.error(error);
