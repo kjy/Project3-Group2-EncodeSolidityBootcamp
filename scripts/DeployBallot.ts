@@ -1,6 +1,8 @@
-import { ethers, Wallet } from "ethers";
-import { Ballot, Ballot__factory, MyToken, MyToken__factory } from "../typechain-types";
+import { ethers } from "ethers";
+import { Ballot__factory } from "../typechain-types";
 import * as dotenv from "dotenv";
+import { SetupSigner } from "./utils";
+import { tokenContractAddress } from "./constants";
 dotenv.config()
 
 function convertStringArrayToBytes32(array: string[]) {
@@ -12,11 +14,6 @@ function convertStringArrayToBytes32(array: string[]) {
 }
 
 async function deploy() {
-    let wallet: Wallet;
-    let ballotContract: Ballot;
-    let erc20Contract: MyToken;
-    const provider = ethers.getDefaultProvider("goerli", { etherscan: process.env.ETHERSCAN_API_KEY })
-
     // get commnad line args for proposals
     const args = process.argv;
     const proposals = args.slice(2);
@@ -28,19 +25,8 @@ async function deploy() {
         console.log(`proposal ${i + 1}: ${el}`)
     })
 
-    // setup signer and factory from wallet
-    if (process.env.MNEMONIC != "") {
-        wallet = ethers.Wallet.fromMnemonic(process.env.MNEMONIC ?? "")
-    } else {
-        wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "")
-    }
-    const signer = wallet.connect(provider)
-
-    // Deploy ERC20
-    const erc20Factory = new MyToken__factory(signer);
-    erc20Contract = await erc20Factory.deploy();
-    await erc20Contract.deployed();
-    console.log(`ERC20 Contract deployed at address ${erc20Contract.address}`)
+    const signer = await SetupSigner();
+    const provider = ethers.getDefaultProvider("goerli", { etherscan: process.env.ETHERSCAN_API_KEY })
 
     // Deploy TokenizedBallot
     const ballotFactory = new Ballot__factory(signer);
@@ -49,9 +35,9 @@ async function deploy() {
     const currentBlock = await provider.getBlock("latest");
 
     // deploy contract
-    ballotContract = await ballotFactory.deploy(
+    const ballotContract = await ballotFactory.deploy(
         convertStringArrayToBytes32(proposals),
-        erc20Contract.address,
+        tokenContractAddress,
         currentBlock.number
     )
     await ballotContract.deployed();
