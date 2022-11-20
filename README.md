@@ -14,3 +14,7 @@
 
 Link to submit
 https://encodeclub.typeform.com/octoberweekend3
+
+#### Mint instructions
+
+`yarn ts-node --files .\scripts\Mint.ts <voter address> <amount>`
