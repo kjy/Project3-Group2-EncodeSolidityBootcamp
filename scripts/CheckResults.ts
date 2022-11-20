@@ -1,6 +1,6 @@
 
 
-import * from "./utils";
+import * from "./utils.ts";
 import { Wallet } from "ethers";
 import { TokenizedBallots } from "../typechain-types";
 // dotenv.config()
