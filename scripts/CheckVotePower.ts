@@ -1,4 +1,4 @@
-import { SetupSigner } from "./constants";
+import { SetupSigner } from "./utils";
 
 async function checkVotePower() {
     const [ballotContract, _] = await SetupSigner();
