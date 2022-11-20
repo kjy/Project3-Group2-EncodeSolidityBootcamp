@@ -1,5 +1,6 @@
 import { ethers, Wallet } from "ethers";
 import { Ballot, Ballot__factory, MyToken, MyToken__factory } from "../typechain-types";
+import { ballotContractAddress, tokenContractAddress } from "./constants";
 import * as dotenv from "dotenv";
 dotenv.config()
 
