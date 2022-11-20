@@ -5,7 +5,7 @@ import { Wallet } from "ethers";
 import { TokenizedBallots } from "../typechain-types";
 dotenv.config()
 import * as dotenv from "dotenv";
-dotenv.config()
+
 
 
 
