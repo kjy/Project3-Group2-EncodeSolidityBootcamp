@@ -4,7 +4,7 @@ import { ballotContractAddress, tokenContractAddress } from "./constants";
 import * as dotenv from "dotenv";
 dotenv.config()
 
-export async function SetupSigner(): Promise<[Ballot, MyToken]> {
+export async function SetupSigner(): Promise<Wallet> {
     const provider = ethers.getDefaultProvider("goerli", { etherscan: process.env.ETHERSCAN_API_KEY })
     let wallet: Wallet;
 
@@ -13,13 +13,15 @@ export async function SetupSigner(): Promise<[Ballot, MyToken]> {
     } else {
         wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "")
     }
-    const signer = wallet.connect(provider)
+    return wallet.connect(provider)
+}
 
+export async function ballotContract(signer: Wallet): Promise<Ballot> {
     const ballotFactory = new Ballot__factory(signer);
-    const ballotContract = await ballotFactory.attach(ballotContractAddress);
+    return await ballotFactory.attach(ballotContractAddress);
+}
 
+export async function tokenContract(signer: Wallet): Promise<MyToken> {
     const tokenFactory = new MyToken__factory(signer);
-    const tokenContract = await tokenFactory.attach(tokenContractAddress);
-
-    return [ballotContract, tokenContract];
+    return await tokenFactory.attach(tokenContractAddress);
 }
