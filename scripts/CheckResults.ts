@@ -1,4 +1,5 @@
 async function checkResults() {
+    // start here
 
 }
 
