@@ -28,13 +28,13 @@ async function vote() {
     console.log(`Tokenized Ballot Contract Address at ${ballotContractAddress}`);
     
     vote().catch((error) => {
-        console.error(error);
+        console.log(error);
         process.exitCode = 1;
     });
 
 };
 
-// To run file, yarn run ts-node --files scripts/Vote.ts proposalIndexNum amount
+// To run file, yarn run ts-node --files scripts/Vote.ts    proposalIndexNum     amount
 
     /*
     From TokenizedBallots.sol

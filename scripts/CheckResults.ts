@@ -7,8 +7,6 @@ dotenv.config()
 import * as dotenv from "dotenv";
 
 
-
-
 async function checkResults() {
     // TODO
     
@@ -18,7 +16,7 @@ async function checkResults() {
     tokenizedBallotContract.SetUpSigner();
 
     // function from utils.ts
-    tokenizedBallotContract.ballotContract(signer: Wallet);
+    tokenizedBallotContract.ballotContract(Signer: Wallet);
 
 
     // read winner name
@@ -32,14 +30,14 @@ async function checkResults() {
 }
 
 checkResults().catch((error) => {
-    console.error(error);
+    console.log(error);
     process.exitCode = 1;
 });
 
 
 /*
 
-To run file,   yarn run ts-node --files ./scripts/CheckResults.ts ./scripts/CheckResults.ts  "ballotContractAddress"
+To run file,   yarn run ts-node --files ./scripts/CheckResults.ts   "ballotContractAddress"
 
 
 From constants.ts
