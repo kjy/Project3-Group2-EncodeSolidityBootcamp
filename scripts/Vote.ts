@@ -9,7 +9,7 @@ async function vote() {
     
     const [ballotContract, tokenContract] = await SetupSigner();
 
-    
+
     const args = process.argv.slice(3);
 
     const proposal = args[0];  // proposal index of 1/3 proposals
@@ -21,7 +21,7 @@ async function vote() {
     const tx = await tokenContract.vote(proposal, amount);
 
     const mintTx = await tokenContract.mint(voter, amount);
-    await mintTx.wait()
+    await mintTx.wait();
 
     let voterTokenBalance = await tokenContract.balanceOf(voter);
     console.log(`After voting ${voter} has a total of ${voterTokenBalance} decimal units`);
