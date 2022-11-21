@@ -1,7 +1,7 @@
 
 import { SetupSigner } from "./utils";
-import * from "./constants.ts";
-dotenv.config()
+//import { ballotContractAddress } from "./constants.ts";
+dotenv.config();
 import * as dotenv from "dotenv";
 
 
