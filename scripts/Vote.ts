@@ -7,10 +7,10 @@ import * from "./constants.ts";
 async function vote() {
     // TODO
     
-    let const [ballotContract, tokenContract] = await SetupSigner();
+    const [ballotContract, tokenContract] = await SetupSigner();
 
     
-    const args = process.argv.slice(2);
+    const args = process.argv.slice(3);
 
     const proposal = args[0];  // proposal index of 1/3 proposals
     const voter = args[1]; // voter by address
