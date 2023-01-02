@@ -1,3 +1,5 @@
+Notion Link: https://www.notion.so/Project-3-Group-2-cd51fa29168d40b39cc6447fae1e8cb8
+
 ### Weekend 3 Group Project
 - Complete the contracts together
 - Develop and run scripts for “TokenizedBallot.sol” within your group to give voting tokens, delegating voting power, casting votes, checking vote power and querying results
